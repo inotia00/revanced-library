@@ -56,6 +56,7 @@ kotlin {
             implementation(libs.apkzlib)
             implementation(libs.bcpkix.jdk18on)
             implementation(libs.guava)
+            implementation(libs.jackson.module.kotlin)
             implementation(libs.jadb)
             implementation(libs.kotlin.reflect)
             implementation(libs.kotlinx.serialization.json)
