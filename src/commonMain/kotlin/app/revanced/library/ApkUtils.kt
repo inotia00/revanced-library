@@ -49,8 +49,9 @@ object ApkUtils {
      * 6. Realign the APK.
      *
      * @param apkFile The file to apply the patched files to.
+     * @param exclude An array of libraries to remove.
      */
-    fun PatcherResult.applyTo(apkFile: File) {
+    fun PatcherResult.applyTo(apkFile: File, exclude: Array<String>? = null) {
         ZFile.openReadWrite(apkFile, zFileOptions).use { targetApkZFile ->
             dexFiles.forEach { dexFile ->
                 targetApkZFile.add(dexFile.name, dexFile.stream)
@@ -84,6 +85,13 @@ object ApkUtils {
                     targetApkZFile.entries().filter { entry ->
                         entry.centralDirectoryHeader.name in resources.deleteResources
                     }.forEach(StoredEntry::delete)
+                }
+
+                exclude?.let {
+                    if (exclude.isNotEmpty()) {
+                        logger.info("Ripping selected native libs")
+                        targetApkZFile.entries().filter { entry -> exclude.any { entry.centralDirectoryHeader.name.startsWith("lib/$it/") } }.forEach(StoredEntry::delete)
+                    }
                 }
             }
 
