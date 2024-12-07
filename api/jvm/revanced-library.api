@@ -26,7 +26,8 @@ public final class app/revanced/library/ApkSigner$Signer {
 
 public final class app/revanced/library/ApkUtils {
 	public static final field INSTANCE Lapp/revanced/library/ApkUtils;
-	public final fun applyTo (Lapp/revanced/patcher/PatcherResult;Ljava/io/File;)V
+	public final fun applyTo (Lapp/revanced/patcher/PatcherResult;Ljava/io/File;[Ljava/lang/String;)V
+	public static synthetic fun applyTo$default (Lapp/revanced/library/ApkUtils;Lapp/revanced/patcher/PatcherResult;Ljava/io/File;[Ljava/lang/String;ILjava/lang/Object;)V
 	public final fun signApk (Ljava/io/File;Ljava/io/File;Ljava/lang/String;Lapp/revanced/library/ApkUtils$KeyStoreDetails;)V
 }
 
@@ -45,6 +46,25 @@ public final class app/revanced/library/ApkUtils$PrivateKeyCertificatePairDetail
 	public synthetic fun <init> (Ljava/lang/String;Ljava/util/Date;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun getCommonName ()Ljava/lang/String;
 	public final fun getValidUntil ()Ljava/util/Date;
+}
+
+public final class app/revanced/library/Options {
+	public static final field INSTANCE Lapp/revanced/library/Options;
+	public final fun deserialize (Ljava/lang/String;)[Lapp/revanced/library/Options$Patch;
+	public final fun serialize (Ljava/util/Set;Z)Ljava/lang/String;
+	public static synthetic fun serialize$default (Lapp/revanced/library/Options;Ljava/util/Set;ZILjava/lang/Object;)Ljava/lang/String;
+	public final fun setOptions (Ljava/util/Set;Ljava/io/File;)V
+	public final fun setOptions (Ljava/util/Set;Ljava/lang/String;)V
+}
+
+public final class app/revanced/library/Options$Patch {
+	public final fun getOptions ()Ljava/util/List;
+	public final fun getPatchName ()Ljava/lang/String;
+}
+
+public final class app/revanced/library/Options$Patch$Option {
+	public final fun getKey ()Ljava/lang/String;
+	public final fun getValue ()Ljava/lang/Object;
 }
 
 public final class app/revanced/library/OptionsKt {
