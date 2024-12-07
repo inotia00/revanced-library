@@ -165,14 +165,32 @@ object ApkUtils {
         outputApkFile: File,
         signer: String,
         keyStoreDetails: KeyStoreDetails,
-    ) = ApkSigner.newApkSigner(
-        signer,
-        if (keyStoreDetails.keyStore.exists()) {
-            readPrivateKeyCertificatePairFromKeyStore(keyStoreDetails)
-        } else {
-            newPrivateKeyCertificatePair(PrivateKeyCertificatePairDetails(), keyStoreDetails)
-        },
-    ).signApk(inputApkFile, outputApkFile)
+    ) {
+        val newApkSigner = try {
+            ApkSigner.newApkSigner(
+                signer,
+                if (keyStoreDetails.keyStore.exists()) {
+                    readPrivateKeyCertificatePairFromKeyStore(keyStoreDetails)
+                } else {
+                    newPrivateKeyCertificatePair(PrivateKeyCertificatePairDetails(), keyStoreDetails)
+                },
+            )
+        } catch (exception: IllegalArgumentException) {
+            // sign with legacy password (CLI 3.0)
+            ApkSigner.newApkSigner(
+                signer,
+                readPrivateKeyCertificatePairFromKeyStore(
+                    KeyStoreDetails(
+                        keyStoreDetails.keyStore,
+                        "ReVanced",
+                        "alias",
+                        "ReVanced",
+                    )
+                ),
+            )
+        }
+        newApkSigner.signApk(inputApkFile, outputApkFile)
+    }
 
     /**
      * Details for a keystore.
