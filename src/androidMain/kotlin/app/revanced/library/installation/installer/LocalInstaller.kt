@@ -76,9 +76,9 @@ class LocalInstaller(
     }
 
     override suspend fun getInstallation(packageName: String) = try {
-        val packageInfo = context.packageManager.getPackageInfo(packageName, 0)
-
-        Installation(packageInfo.applicationInfo.sourceDir)
+        context.packageManager.getPackageInfo(packageName, 0).applicationInfo?.let {
+            Installation(it.sourceDir)
+        }
     } catch (e: PackageManager.NameNotFoundException) {
         null
     }
