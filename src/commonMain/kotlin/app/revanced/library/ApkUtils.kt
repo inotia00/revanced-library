@@ -21,7 +21,7 @@ object ApkUtils {
     private const val LIBRARY_EXTENSION = ".so"
 
     // Alignment for native libraries.
-    private const val LIBRARY_ALIGNMENT = 1024 * 4
+    private const val LIBRARY_ALIGNMENT = 1024 * 16
 
     // Alignment for all other files.
     private const val DEFAULT_ALIGNMENT = 4
