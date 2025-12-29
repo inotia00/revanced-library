@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/inotia00/revanced-library/compare/v1.0.0...v1.0.1) (2025-12-29)
+
+
+### Bug Fixes
+
+* Align native libraries to 16kb ([68c324d](https://github.com/inotia00/revanced-library/commit/68c324d120d03420271a92bf15557795a18fcc64))
+
 # 1.0.0 (2024-12-07)
 
 
